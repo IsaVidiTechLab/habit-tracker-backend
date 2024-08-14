@@ -48,6 +48,33 @@ router.post("/areas",(req,res)=>{
         })
 })
 
+router.put("/areas/:areaId",(req,res,next) => {
+    const {areaId} = req.params;
+    const {userId, areaName} = req.body;
+    const newReqBody = {userId, areaName}
+
+    Area.findByIdAndUpdate (areaId, newReqBody, {new:true})
+    .then((updatedArea)=>{
+        res.status(200).json(updatedArea)
+    })
+    .catch((err)=>{
+        next(err)
+    })
+})
+
+router.delete("/areas/:areaId", (req, res, next) => {
+    const {areaId} = req.params;
+
+    Area.findByIdAndDelete(areaId)
+    .then(()=>{
+        console.log("Area Deleted")
+        res.status(204).send({ message : "Area Deleted"})
+    })
+    .catch((err)=>{
+        next(err)
+    })
+})
+
 
 
 module.exports = router;

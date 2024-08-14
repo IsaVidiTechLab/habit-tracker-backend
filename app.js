@@ -25,6 +25,12 @@ const { isAuthenticated } = require("./middleware/jwt.middleware");
 const areasRoutes = require("./routes/areas.routes")
 app.use("/api", isAuthenticated, areasRoutes);
 
+const habitsRoutes = require("./routes/habits.routes")
+app.use("/api", isAuthenticated, habitsRoutes);
+
+const dailyHabitsRoutes = require("./routes/dailyhabits.routes")
+app.use("/api", isAuthenticated, dailyHabitsRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

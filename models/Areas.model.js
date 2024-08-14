@@ -13,4 +13,4 @@ const areaSchema = new Schema({
 })
 
 const Areas = model ("Areas", areaSchema);
-model.exports = Areas;
+module.exports = Areas;

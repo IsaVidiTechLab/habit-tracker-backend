@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Areas = require("../models/Areas.model");
+const Area = require("../models/Areas.model");
 const mongoose = require("mongoose");
 
 router.get("/areas/:areaId",(req,res)=>{
@@ -10,7 +10,7 @@ router.get("/areas/:areaId",(req,res)=>{
         return;
     }
 
-    Areas.findById(areaId)
+    Area.findById(areaId)
     .then((area)=>{
         console.log("Retrived Area ", area);
         res.json(area);
@@ -23,7 +23,7 @@ router.get("/areas/:areaId",(req,res)=>{
 
 router.get("/areas",(req,res)=>{
     console.log(req.payload)
-    AreasCat.find({ userId: req.payload._id})
+    Area.find({ userId: req.payload._id})
         .then((area)=>{
             console.log("Retrived Area", area)
             res.json(area)
@@ -38,7 +38,7 @@ router.post("/areas",(req,res)=>{
     const { userId , areaName} = req.body;
     const newArea = { userId , areaName};
 
-    Areas.create(newArea)
+    Area.create(newArea)
         .then(()=>{
             res.json(newArea)
         })

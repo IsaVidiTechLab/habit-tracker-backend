@@ -39,8 +39,8 @@ router.get("/dailyhabits/:dailyHabitId", (req, res) => {
 
 //POST a daily habit
 router.post("/dailyhabits", (req, res) => {
-    const { habitId, completion, date } = req.body;
-    const newDailyHabit = { habitId, completion, date };
+    const {userId, habitId, completion, date } = req.body;
+    const newDailyHabit = {userId, habitId, completion, date };
 
     DailyHabit.create(newDailyHabit)
         .then(() => {
@@ -55,14 +55,14 @@ router.post("/dailyhabits", (req, res) => {
 //PUT a daily habit
 router.put("/dailyhabits/:dailyHabitId", (req, res) => {
     const { dailyHabitId } = req.params;
-    const { habitId, completion, date } = req.body;
+    const {userId, habitId, completion, date } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(dailyHabitId)) {
         res.status(400).send({ message: "Specified id is not valid" });
         return
     }
 
-    DailyHabit.findByIdAndUpdate(dailyHabitId, { habitId, completion, date }, { new: true })
+    DailyHabit.findByIdAndUpdate(dailyHabitId, { userId, habitId, completion, date }, { new: true })
         .then((updatedDailyHabit) => {
             res.json(updatedDailyHabit)
         })

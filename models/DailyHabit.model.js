@@ -6,6 +6,11 @@ const dailyHabitSchema = new Schema({
        ref: 'Habit',
        required: [true, 'Habit is required.']
    },
+   userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true]
+   },
    completion: {
          type: Boolean,
          default: false
